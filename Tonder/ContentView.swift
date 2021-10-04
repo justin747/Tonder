@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let cardGradient
+   
     var body: some View {
         VStack {
             
@@ -41,11 +41,7 @@ struct ContentView: View {
             
             //MARK: - Card View
             
-            ZStack {
-                Image("p0")
-                    .resizable()
-                LinearGradient(gradient: <#T##Gradient#>, startPoint: .top, endPoint: .bottom)
-            }
+            CardView()
             
             
             
@@ -78,5 +74,34 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct CardView: View {
+    
+    let cardGradient = Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.5)])
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Image("p0")
+                .resizable()
+            LinearGradient(gradient: cardGradient, startPoint: .top, endPoint: .bottom)
+            VStack {
+                Spacer()
+                VStack(alignment: .leading) {
+                    HStack{
+                        Text("Username")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Text("23")
+                            .font(.title)
+                    }
+                    
+                    Text("Hello World")
+                }
+                .padding()
+                .foregroundColor(.white)
+            }
+        }
     }
 }
