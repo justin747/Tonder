@@ -41,8 +41,12 @@ struct ContentView: View {
             
             //MARK: - Card View
             
-            CardView()
-            
+            ZStack {
+                ForEach(Card.data) { card in
+                    CardView(card: card)
+                        .padding(8)
+                }
+            }
             
             
             //MARK: - Bottom HStack
@@ -79,29 +83,31 @@ struct ContentView_Previews: PreviewProvider {
 
 struct CardView: View {
     
+    let card: Card
     let cardGradient = Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.5)])
     
     var body: some View {
         ZStack(alignment: .leading) {
-            Image("p0")
+            Image(card.imageName)
                 .resizable()
             LinearGradient(gradient: cardGradient, startPoint: .top, endPoint: .bottom)
             VStack {
                 Spacer()
                 VStack(alignment: .leading) {
                     HStack{
-                        Text("Username")
+                        Text(card.name)
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                        Text("23")
+                        Text(String(card.age))
                             .font(.title)
                     }
                     
-                    Text("Hello World")
+                    Text(card.bio)
                 }
                 .padding()
                 .foregroundColor(.white)
             }
         }
+        .cornerRadius(8)
     }
 }
